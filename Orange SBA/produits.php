@@ -4,7 +4,11 @@ include "include/functions.php";
 
 $categories = getAllCategories();
 
-$produits = getAllProduct();
+if(isset($_GET["id"])){
+    $produits = getProductsByCategorie($_GET['id']);
+}else{
+    $produits = getAllProduct();
+}
 
 ?>
 
@@ -20,7 +24,7 @@ $produits = getAllProduct();
 
     <!-- swiper css link  -->
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-
+   
     <!-- cusom css file link  -->
     <link rel="stylesheet" href="css/style.css">
     <title>produits</title>
@@ -41,23 +45,26 @@ $produits = getAllProduct();
     foreach ($produits as $produit) {
         echo '<div class="box" data-target="p-1">
                 <div class="image">
-                    <img src="images/'.$produit['image'].'" class="main-img" alt="">
+                    <img src="images/'.$produit['images'].'" class="main-img" alt="">
                 </div>
                 <div class="content">
                     <h3>' . $produit['nom'] . '</h3>
-                    <div class="price">' . $produit['prix'] . '</span></div>
+                    <h4>' . $produit['details'] . '</h4>
+                    <div class="price">' . $produit['prix'].' TND </span></div>
 
                     <form action="actions/commander.php" method="POST">
                     <input type="hidden" name="produit" value="' . $produit['id'] . '">
-                    <input type="number" name="quantité" step="1" placeholder="quantité de produit">
-                        <button type="submit" class="fas fa-shopping-cart">Acheter</button>
+                        <input type="number" name="quantité" step="1" placeholder="quantité de produit">
+                        <button type="submit" class=" fas fa-shopping-cart ">Acheter</button>
     
                 </form>
                 </div>
                 
             </div>';
     }
-    
+  
+
+
 ?>
 
 </section>
@@ -103,6 +110,7 @@ include "include/footer.php";
 
 <!-- swiper js link      -->
 <script src="https://unpkg.com/swiper@7/swiper-bundle.min.js"></script>
+
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>

@@ -166,12 +166,12 @@
 
           </div>
           <div class="form-group mb-2">
-            <input type="file" name="image" required class="form-control" >
+            <input type="file" name="images" required class="form-control" >
             
           </div>
           <div class="form-group mb-2" >
           <label for="exampleSelect">Sélectionnez une catégorie :</label>
-            <select name="categorie " class="form-control" id="exampleSelect" >
+            <select name="categorie" class="form-control" id="exampleSelect" >
               <?php
                 foreach($categories as $index => $categorie)
                 print '<option value="'.$categorie['id'].'">'.$categorie['nom'].'</option>';
@@ -222,7 +222,7 @@
 
                     </div>
                     <div class="form-group">
-                      <input type="file" name="image"  class="form-control" value="<?php echo $produit['image'];?>" >
+                      <input type="file" name="images"  class="form-control" value="<?php echo $produit['images'];?>" >
                       
                     </div>
                     <div class="form-group">

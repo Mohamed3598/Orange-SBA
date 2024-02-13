@@ -12,10 +12,10 @@ $date_creation = date('Y-m-d');
 
 //upload image
     $target_dir = "../../images/";
-    $target_file = $target_dir . basename($_FILES["image"]["name"]);
+    $target_file = $target_dir . basename($_FILES["images"]["name"]);
 
-    if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-        $image = $_FILES["image"]["name"];
+    if (move_uploaded_file($_FILES["images"]["tmp_name"], $target_file)) {
+        $image = $_FILES["images"]["name"];
     } else {
         echo "Sorry, there was an error uploading your file.";
     }
@@ -27,7 +27,7 @@ include "../../include/functions.php";
 $conn = connect();
 
 //3-creation de la requette
-$requette = "INSERT INTO produits(nom,details,prix,image,catégorie,date_creation) VALUES('$nom','$details','$prix','$image','$categorie','$date')";
+$requette = "INSERT INTO produits(nom,details,prix,images,categorie,date_creation) VALUES('$nom','$details','$prix','$image','$categorie','$date')";
 
 //4-execution de la requette
 $resultat = $conn->query($requette);

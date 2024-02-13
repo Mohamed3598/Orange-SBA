@@ -1,3 +1,17 @@
+<?php
+session_start();
+include "include/functions.php";
+$total = $_SESSION['panier'][1];
+$commandes = [];
+
+if(isset($_SESSION['panier'])){
+    if(count($_SESSION['panier'][3]) > 0) {
+            $commandes = $_SESSION['panier'][3];
+
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,148 +46,51 @@ include "include/side_bar.php"
 
     <div class="box-container">
 
-        <div class="box">
-            <i class="fas fa-times"></i>
-            <img src="images/product-1.jpg" alt="">
-            <div class="content">
-                <h3>smartphone</h3>
-                <form action="">
-                    <span>quantity : </span>
-                    <input type="number" name="" value="1" id="">
-                </form>
-                <div class="price">$249.99 <span>$399.99</span></div>
-            </div>
-        </div>
+    <?php
+        foreach($commandes as $index => $commande){
+            echo '<div class="box">
+                <a href="actions/enlever-produit.php?id='.$index.'" class="fas fa-times"></a>';
+            
+            // Check if the key 6 exists in the $commande array
+            if(isset($commande[6])){
+                echo '<img src="images/'.$commande[6].'" alt="">';
+            } else {
+                echo '<p>Image not available</p>';
+            }
+            
+            echo '<div class="content" >'.($index+1).'
+                    <h3>'.$commande[5].'</h3>
+                    <form action="">
+                        <span>quantity : '.$commande[0].' </span>
+                        <input type="number" name="" value="1" id="">
+                    </form>
+                    <div class="price"> '.$commande[1].' TND</div>
+                </div>
+            </div>';
+        }
+        
+    ?>
+        
 
-        <div class="box">
-            <i class="fas fa-times"></i>
-            <img src="images/product-2.jpg" alt="">
-            <div class="content">
-                <h3>camera</h3>
-                <form action="">
-                    <span>quantity : </span>
-                    <input type="number" name="" value="1" id="">
-                </form>
-                <div class="price">$249.99 <span>$399.99</span></div>
-            </div>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-times"></i>
-            <img src="images/product-3.jpg" alt="">
-            <div class="content">
-                <h3>television</h3>
-                <form action="">
-                    <span>quantity : </span>
-                    <input type="number" name="" value="1" id="">
-                </form>
-                <div class="price">$249.99 <span>$399.99</span></div>
-            </div>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-times"></i>
-            <img src="images/product-4.jpg" alt="">
-            <div class="content">
-                <h3>speaker</h3>
-                <form action="">
-                    <span>quantity : </span>
-                    <input type="number" name="" value="1" id="">
-                </form>
-                <div class="price">$249.99 <span>$399.99</span></div>
-            </div>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-times"></i>
-            <img src="images/product-6.jpg" alt="">
-            <div class="content">
-                <h3>smartwatch</h3>
-                <form action="">
-                    <span>quantity : </span>
-                    <input type="number" name="" value="1" id="">
-                </form>
-                <div class="price">$249.99 <span>$399.99</span></div>
-            </div>
-        </div>
-
-        <div class="box">
-            <i class="fas fa-times"></i>
-            <img src="images/product-7.jpg" alt="">
-            <div class="content">
-                <h3>headphone</h3>
-                <form action="">
-                    <span>quantity : </span>
-                    <input type="number" name="" value="1" id="">
-                </form>
-                <div class="price">$249.99 <span>$399.99</span></div>
-            </div>
-        </div>
 
     </div>
 
     <div class="cart-total">
-        <h3> subtotal : <span>$1499.94</span> </h3>
-        <h3> discount : <span>-$99.94</span> </h3>
-        <h3> subtotal : <span>$1400.00</span> </h3>
-        <a href="#" class="btn">proceed to checkout</a>
+        <h3> Total : <span><?php echo $total; ?> TND</span> </h3>
+        <a href="actions/valider.php" class="btn">Valider la  panier</a>
     </div>
 
 </section>
 
 <!-- shopping cart section ends -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- footer section starts  -->
 
-<section class="quick-links">
-
-    <a href="index.php" class="logo"> <i class="fas fa-store"></i> Orange SBA </a>
-
-    <div class="links">
-        <a href="index.php"> home </a>
-        <a href="about.php"> about </a>
-        <a href="products.php"> products </a>
-        <a href="contact.php"> contact </a>
-        <a href="login.php"> login </a>
-        <a href="register.php"> register </a>
-        <a href="cart.php"> cart </a>
-    </div>
-
-    <div class="share">
-        <a href="#" class="fab fa-facebook-f"></a>
-        <a href="#" class="fab fa-twitter"></a>
-        <a href="#" class="fab fa-instagram"></a>
-        <a href="#" class="fab fa-linkedin"></a>
-    </div>
-
-</section>
-
-<section class="credit">
-
-    <p> created by <span>Mohamed Toumi</span> | all rights reserved! </p>
-
-    <img src="images/card_img.png" alt="">
-
-</section>
+<?php
+include "include/footer.php"
+?>
 
 <!-- footer section ends -->
-
-
 
 
 <!-- swiper js link      -->

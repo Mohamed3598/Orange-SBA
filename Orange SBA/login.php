@@ -14,11 +14,14 @@ if (!empty($_POST)) {//click sur le button register
     $user = ConnectVisiteur($_POST);
     if (is_array($user) && count($user) > 0) {
         session_start();
+        $_SESSION['id'] = $user["id"];
         $_SESSION['email'] = $user["email"];
         $_SESSION['nom'] = $user["nom"];
         $_SESSION['prénom'] = $user["prénom"];
         $_SESSION['mdp'] = $user["mdp"];
         $_SESSION['numero'] = $user["numero"];
+        // $_SESSION['etat'] = $user["etat"];
+
         header('Location: profile.php');
 
     }

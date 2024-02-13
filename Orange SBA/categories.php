@@ -45,7 +45,7 @@ include "include/side_bar.php"
 
     <?php
         foreach ($categories as $categorie) {
-        echo '<a href="produits.php" class="box">
+         echo '<a href="produits.php?id='.$categorie['id'].'" class="box">
             <h3>' . $categorie['nom'] . '</h3>
           </a>';
             }
